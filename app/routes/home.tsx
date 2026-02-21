@@ -2,16 +2,34 @@ import type { Route } from "./+types/home";
 import Navbar from "../../components/Navbar";
 import {AArrowDown, ArrowRight, ArrowUp, ArrowUpRight, Clock, Layers} from "lucide-react";
 import Button from "../../components/UI/Button";
+import Upload from "../../components/Upload";
+import {useNavigate} from "react-router";
 
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    {
+        title: "New React Router App"
+    },
+    {
+        name: "description",
+        content: "Welcome to React Router!"
+    },
   ];
 }
 
 export default function Home() {
+
+    const navigate = useNavigate();
+
+    const handleUploadComplete = async (base64:string) => {  // base64 means uploaded image eka
+        const newId = Date.now().toString();  // image ekt file name ekk create karnava
+
+        navigate(`/visualizer/${newId}`);  // img file ek upload complete una gamn redirect to visualizer.$id.tsx file ekt
+
+        return true;
+    }
+
   return (
       <div className="home">
         <Navbar />
@@ -22,7 +40,7 @@ export default function Home() {
                       <div className="pulse"></div>
                   </div>
 
-                  <p>Introduing Roomify 2.0</p>
+                  <p>Introducing Roomify 2.0</p>
               </div>
 
               <h1>Build beautiful spaces at the speed of, though with Roomify</h1>
@@ -55,7 +73,9 @@ export default function Home() {
                         <p>Supports JPG, PNg, formats up to 10MB </p>
                     </div>
 
-                      <p>Upload images</p>
+                      <Upload
+                          onComplete={handleUploadComplete}  // img ek arn navigate karana function ek call venava
+                      />
                   </div>
               </div>
           </section>
