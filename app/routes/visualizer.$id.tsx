@@ -1,10 +1,12 @@
-import React from 'react'
+import { useParams } from "react-router";
 
-const visualizerId = () => {
+const Visualizer = () => {
+    const { id } = useParams<{ id: string }>();
+
     return (
-        <div>visualizerId</div>
+        <div>Visualizer: {id}</div>
     )
 }
 
 
-export default visualizerId;
+export default Visualizer;

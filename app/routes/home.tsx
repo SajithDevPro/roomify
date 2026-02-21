@@ -22,10 +22,10 @@ export default function Home() {
 
     const navigate = useNavigate();
 
-    const handleUploadComplete = async (base64:string) => {  // base64 means uploaded image eka
-        const newId = Date.now().toString();  // image ekt file name ekk create karnava
+    const handleUploadComplete = async (base64:string) => {
+        const newId = Date.now().toString();
 
-        navigate(`/visualizer/${newId}`);  // img file ek upload complete una gamn redirect to visualizer.$id.tsx file ekt
+        navigate(`/visualizer/${newId}`);
 
         return true;
     }
@@ -74,7 +74,7 @@ export default function Home() {
                     </div>
 
                       <Upload
-                          onComplete={handleUploadComplete}  // img ek arn navigate karana function ek call venava
+                          onComplete={handleUploadComplete}
                       />
                   </div>
               </div>
