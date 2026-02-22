@@ -14,7 +14,7 @@ export const getCurrentUser = async () => {
     }
 }
 
-export const createProject = async ({ item }: CreateProjectParams):
+export const createProject = async ({ item, visibility }: CreateProjectParams):
 Promise<DesignItem | null | undefined> => {
     const projectId = item.id;
 
@@ -56,7 +56,8 @@ Promise<DesignItem | null | undefined> => {
         ...rest,
         sourceImage: resolvedSource,
         renderedImage: resolvedRender,
-    }
+        ...(visibility ? { isPublic: visibility === "public" } : {}),
+    };
 
     try {
         // Call the worker to store project in kv
