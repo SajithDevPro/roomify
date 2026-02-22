@@ -51,6 +51,8 @@ const Upload = ({ onComplete }: UploadProps) => {
 
                 if (!base64) {
                     console.error("Base64 conversion failed");
+                    setFile(null);
+                    setProgress(0);
                     return;
                 }
 
