@@ -37,33 +37,46 @@ const Upload = ({ onComplete }: UploadProps) => {
             if (!isSignedIn) return;
 
             if (selectedFile.size > MAX_FILE_SIZE_BYTES) {
-                 console.error(`File exceeds ${MAX_FILE_SIZE_MB}MB limit`);
-                 return;
+                console.error(`File exceeds ${MAX_FILE_SIZE_MB}MB limit`);
+                return;
             }
 
             setFile(selectedFile);
+            setProgress(0);
 
             const reader = new FileReader();
 
             reader.onload = () => {
                 const base64 = reader.result as string;
 
+                if (!base64) {
+                    console.error("Base64 conversion failed");
+                    setFile(null);
+                    setProgress(0);
+                    return;
+                }
+
                 let currentProgress = 0;
 
                 const interval = setInterval(() => {
                     currentProgress += PROGRESS_STEP;
-                    setProgress(currentProgress);
 
                     if (currentProgress >= 100) {
+                        currentProgress = 100;
                         clearInterval(interval);
+
+                        setProgress(100);
 
                         setTimeout(() => {
                             onComplete(base64);
                         }, REDIRECT_DELAY_MS);
+
+                        return;
                     }
+
+                    setProgress(currentProgress);
                 }, PROGRESS_INTERVAL_MS);
             };
-
 
             reader.onerror = () => {
                 setFile(null);
@@ -162,8 +175,7 @@ const Upload = ({ onComplete }: UploadProps) => {
                             <p className="status-text">
                                 {progress < 100
                                     ? "Analyzing floor plan..."
-                                    : "Redirecting..."
-                                }
+                                    : "Redirecting..."}
                             </p>
                         </div>
                     </div>
