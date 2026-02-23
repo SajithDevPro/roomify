@@ -1,0 +1,61 @@
+import {data} from "react-router";
+import puter from "@heyputer/puter.js";
+import {ROOMIFY_RENDER_PROMPT} from "./constants";
+
+export async function fetchAsDataUrl(url: string): Promise<string> {
+
+    const response = await fetch(url);
+
+    if (!response.ok) {
+        throw new Error(`Failed to fetch image: ${response.status} ${response.statusText}`);
+    }
+
+    const blob = await response.blob();
+
+    return new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            if (typeof reader.result === "string") {
+                resolve(reader.result);
+            } else {
+                reject(new Error("Failed to convert blob to Data URL"));
+            }
+        };
+
+        reader.onerror = () => {
+            reject(new Error("FileReader failed while reading blob"));
+        };
+
+        reader.readAsDataURL(blob);
+    });
+}
+
+export const generate3DView = async ({ sourceImage }: Generate3DViewParams) => {
+    const dataUrl = sourceImage.startsWith('data:')
+    ? sourceImage
+        : await fetchAsDataUrl(sourceImage);
+
+    const base64Data = dataUrl.split(',')[1];
+    const mimeType = dataUrl.split(';')[0].split(':')[1];
+
+    if (!mimeType || !base64Data) throw new Error('Invalid source image payload');
+    console.log("Calling Gemini with:", mimeType);
+
+    const response = await puter.ai.txt2img(ROOMIFY_RENDER_PROMPT, {
+        provider: 'gemini',
+        model: 'gemini-2.5-flash-image-preview',
+        input_image: base64Data,
+        input_image_mime_type: mimeType,
+        ratio: { w: 1024, h: 1024 }
+    })
+
+    const rawImgaeUrl = (response as HTMLImageElement).src ?? null;
+
+    if(!rawImgaeUrl) return { renderedImage: null, renderedPath: undefined };
+
+    const renderedImage = rawImgaeUrl.startsWith('data:')
+    ? rawImgaeUrl : await fetchAsDataUrl(rawImgaeUrl);
+
+    return { renderedImage, renderedPath: undefined };
+}
