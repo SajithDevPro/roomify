@@ -1,5 +1,5 @@
 import {useLocation, useNavigate, useParams} from "react-router";
-import {useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
 import type {Image} from "lightningcss";
 import {generate3DView} from "../../lib/ai.action";
 import {Box, Download, RefreshCcw, Share, Share2, X} from "lucide-react";
@@ -21,7 +21,7 @@ const Visualizer = () => {
 
     const handleBack = () => navigate('/');
 
-    const runGeneration = async () => {
+    const runGeneration = useCallback(async () => {
         if (!initialImage) return;
 
         try {
@@ -38,7 +38,7 @@ const Visualizer = () => {
         } finally {
             setIsProcessing(false);
         }
-    }
+    }, [initialImage]);
 
     useEffect(() => {
         if (!initialImage || hasInitialGenerated.current) return;
@@ -50,7 +50,7 @@ const Visualizer = () => {
         }
         hasInitialGenerated.current = true;
         runGeneration();
-    }, [initialImage, initialRender]);
+    },[initialImage, initialRender, runGeneration]);
 
 
     return (
