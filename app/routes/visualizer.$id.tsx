@@ -34,7 +34,7 @@ const Visualizer = () => {
                 // update the project with the rendered image.
             }
         } catch (error) {
-            console.error('Generation faild: ', error);
+            console.error('Generation failed: ', error);
         } finally {
             setIsProcessing(false);
         }
