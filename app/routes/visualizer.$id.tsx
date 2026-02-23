@@ -82,7 +82,7 @@ const Visualizer = () => {
                                 }}
                                 className="export"
                                 disabled={!currentImage}>
-                                <Download className="w-4 h-4 mr-2"/> Exit
+                                <Download className="w-4 h-4 mr-2"/> Export
                             </Button>
 
                             <Button
