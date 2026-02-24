@@ -25,14 +25,11 @@ const Visualizer = () => {
 
     const runGeneration = useCallback(async (item: DesignItem) => {
         if (!id || !item.sourceImage) return;
-
         try {
             setIsProcessing(true);
             const result = await generate3DView({sourceImage: item.sourceImage});
-
             if (result.renderedImage) {
                 setCurrentImage(result.renderedImage);
-
                 const updatedItem = {
                     ...item,
                     renderedImage: result.renderedImage,
@@ -41,9 +38,7 @@ const Visualizer = () => {
                     ownerId: item.ownerId ?? userId ?? null,
                     isPublic: item.isPublic ?? false,
                 }
-
                 const saved = await createProject({ item: updatedItem, visibility: "private" })
-
                 if(saved) {
                     setProject(saved);
                     setCurrentImage(saved.renderedImage || result.renderedImage);
@@ -54,7 +49,7 @@ const Visualizer = () => {
         } finally {
             setIsProcessing(false);
         }
-    }, [project?.sourceImage]); // check this
+    }, [id, userId]);
 
 
     useEffect(() => {
