@@ -1,6 +1,6 @@
 import React from "react";
 
-type ButtonVariant = "primary" | "secondary" | "danger";
+type ButtonVariant = "primary" | "secondary" | "ghost" | "outline" | "danger";
 type ButtonSize = "sm" | "md" | "lg";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -24,6 +24,7 @@ const Button: React.FC<ButtonProps> = ({
         `btn--${variant}`,
         `btn--${size}`,
         fullWidth ? "btn--full" : "",
+        "transition-all duration-300 active:scale-95",
         className,
     ]
         .filter(Boolean)
@@ -37,3 +38,10 @@ const Button: React.FC<ButtonProps> = ({
 };
 
 export default Button;
+
+
+
+
+
+
+
