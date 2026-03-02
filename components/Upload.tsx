@@ -99,7 +99,7 @@ const Upload = ({ onComplete }: UploadProps) => {
                     <input
                         type="file"
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                        accept=".jpg,.jpeg,.png"
+                        accept=".jpg,.jpeg,.png,.webp"
                         disabled={!isSignedIn}
                         onChange={handleChange}
                     />
