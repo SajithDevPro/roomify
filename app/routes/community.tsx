@@ -56,7 +56,7 @@ export default function Community() {
                     {[
                         {
                             name: "Alex Morgan",
-                            text: "Roomify helped me speed up my workflow massively."
+                            text: "BuildXo helped me speed up my workflow massively."
                         },
                         {
                             name: "Nimal Perera",

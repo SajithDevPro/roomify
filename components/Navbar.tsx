@@ -72,7 +72,7 @@ const Navbar = () => {
                     <div className="flex items-center gap-8 lg:gap-12">
                         {/* Logo/Brand */}
                         <a
-                            href="/"
+                            href="/home"
                             className="relative group flex items-center gap-2"
                         >
                             <div className="relative">
@@ -83,10 +83,10 @@ const Navbar = () => {
                             </div>
                             <span className="text-xl font-bold tracking-tight">
                                 <span className="bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
-                                    Room
+                                    Build
                                 </span>
                                 <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                                    ify
+                                    Xo
                                 </span>
                             </span>
                         </a>

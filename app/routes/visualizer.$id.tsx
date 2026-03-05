@@ -1,4 +1,4 @@
-import { useNavigate, useOutletContext, useParams } from "react-router";
+import {useLocation, useNavigate, useOutletContext, useParams} from "react-router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { generate3DView } from "../../lib/ai.action";
 import { Box, Download, Share2, X } from "lucide-react";
@@ -8,6 +8,10 @@ import { ReactCompareSlider, ReactCompareSliderImage } from "react-compare-slide
 import html2canvas from "html2canvas";
 
 const Visualizer = () => {
+
+    const location = useLocation();
+    const forceRegenerate = (location.state as { forceRegenerate?: boolean })?.forceRegenerate ?? false;
+
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
     const { userId } = useOutletContext<AuthContext>();
@@ -102,17 +106,18 @@ const Visualizer = () => {
     }, [id]);
 
     useEffect(() => {
-        if (isProjectLoading || hasInitialGenerated.current || !project?.sourceImage) return;
+        if (isProjectLoading || !project?.sourceImage) return;
 
-        if (project.renderedImage) {
-            setCurrentImage(project.renderedImage);
+        // if there's no renderedImage OR forceRegenerate is true, run generation
+        if (!project.renderedImage || forceRegenerate) {
             hasInitialGenerated.current = true;
+            void runGeneration(project);
             return;
         }
 
+        setCurrentImage(project.renderedImage);
         hasInitialGenerated.current = true;
-        void runGeneration(project);
-    }, [project, isProjectLoading, runGeneration]);
+    }, [project, isProjectLoading, runGeneration, forceRegenerate]);
 
     const handleExport = () => {
         if (!currentImage) return;
@@ -161,7 +166,7 @@ const Visualizer = () => {
                                 <Box className="logo text-white w-5 h-5" />
                             </div>
                             <span className="name text-lg font-bold tracking-tight text-white">
-                Roomify <span className="text-zinc-500 font-normal">Studio</span>
+                BuildXo <span className="text-zinc-500 font-normal">Studio</span>
               </span>
                         </div>
                         <Button
@@ -304,7 +309,7 @@ const Visualizer = () => {
                 </div>
             </section>
 
-            <style jsx>{`
+            <style>{`
                 @keyframes scan {
                     0% { top: 0%; opacity: 0; }
                     10% { opacity: 1; }
@@ -316,6 +321,6 @@ const Visualizer = () => {
             `}</style>
         </div>
     );
-};
+}
 
 export default Visualizer;
