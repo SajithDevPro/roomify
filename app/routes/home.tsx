@@ -426,8 +426,8 @@ export default function Home() {
                                         </div>
                                     </div>
                                     <div>
-                                        <p className="font-bold text-white">Sarah Johnson</p>
-                                        <p className="text-sm text-white/40">Architect at Studio M</p>
+                                        <p className="font-bold text-white">John Williams</p>
+                                        <p className="text-sm text-white/40">Architect at Studio Globe NYC</p>
                                     </div>
                                 </div>
                             </div>
@@ -504,6 +504,11 @@ export default function Home() {
         </div>
     );
 }
+
+
+
+
+
 
 
 

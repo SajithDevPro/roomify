@@ -48,8 +48,7 @@ const Navbar = () => {
     const navLinks = [
         { name: 'Product', href: '/', icon: Home },
         { name: 'Pricing', href: '/pricing', icon: Image },
-        { name: 'Community', href: '#', icon: User },
-        { name: 'Enterprise', href: '#', icon: Settings },
+        { name: 'Community', href: '/community', icon: User },
     ];
 
     return (
@@ -134,27 +133,6 @@ const Navbar = () => {
                                 {/* Dropdown Menu */}
                                 {isDropdownOpen && (
                                     <div className="absolute right-0 mt-2 w-48 py-2 bg-[#0a0a0a] border border-white/10 rounded-xl backdrop-blur-xl shadow-premium animate-fade-in">
-                                        <a
-                                            href="/dashboard"
-                                            className="flex items-center gap-2 px-4 py-2 text-sm text-white/60 hover:text-white hover:bg-white/5 transition-colors"
-                                        >
-                                            <Home className="w-4 h-4" />
-                                            Dashboard
-                                        </a>
-                                        <a
-                                            href="/profile"
-                                            className="flex items-center gap-2 px-4 py-2 text-sm text-white/60 hover:text-white hover:bg-white/5 transition-colors"
-                                        >
-                                            <User className="w-4 h-4" />
-                                            Profile
-                                        </a>
-                                        <a
-                                            href="/settings"
-                                            className="flex items-center gap-2 px-4 py-2 text-sm text-white/60 hover:text-white hover:bg-white/5 transition-colors"
-                                        >
-                                            <Settings className="w-4 h-4" />
-                                            Settings
-                                        </a>
                                         <div className="h-px bg-white/10 my-2" />
                                         <button
                                             onClick={handleAuthClick}
@@ -290,6 +268,10 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+
+
 
 
 
