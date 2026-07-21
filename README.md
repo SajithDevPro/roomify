@@ -61,7 +61,7 @@ The system leverages modern AI technologies, image processing techniques, and in
 | React        | Frontend Framework               |
 | Node.js      | Backend Runtime                  |
 | AI/ML Models | Floor Plan Detection             |
-| Three.js     | 3D Rendering Engine              |
+| Gemini model | 3D Rendering Engine              |
 | CodeRabbit   | Automated Code Reviews & Testing |
 
 ---
@@ -82,34 +82,6 @@ Room & Structure Extraction
 Rendering Engine
       ↓
 Interactive 3D Visualization
-```
-
----
-
-# 📸 Screenshots
-
-## Landing Page
-
-```md
-![Landing](docs/images/landing.png)
-```
-
-## Upload Interface
-
-```md
-![Upload](docs/images/upload.png)
-```
-
-## AI Processing
-
-```md
-![Processing](docs/images/processing.png)
-```
-
-## Generated 3D Model
-
-```md
-![3D Model](docs/images/result.png)
 ```
 
 ---
@@ -136,7 +108,6 @@ project-root/
 # ⚙️ Installation
 
 ```bash
-git clone https://github.com/yourusername/yourrepository.git
 
 cd yourrepository
 
@@ -189,9 +160,6 @@ npm run test
 # 👨‍💻 Author
 
 Developed by **Sajith Nuwan**
-
-Software Engineering Undergraduate
-AI Enthusiast | Cloud Enthusiast | Full Stack Developer
 
 ---
 
